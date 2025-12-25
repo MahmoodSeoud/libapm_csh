@@ -105,7 +105,10 @@ int libmain(void) {
     }
 #endif
 
-    if(&__start_vmem != &__stop_vmem) {
+    /* vmem_add is expected to be provided by the loading application (CSH).
+       When not available, we silently skip vmem registration. */
+    extern void vmem_add(void *start, void *stop) __attribute__((weak));
+    if (vmem_add != NULL && &__start_vmem != &__stop_vmem) {
         vmem_add(&__start_vmem, &__stop_vmem);
     }
     if (ret)
