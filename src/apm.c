@@ -105,9 +105,7 @@ int libmain(void) {
     }
 #endif
 
-    if(&__start_vmem != &__stop_vmem) {
-        vmem_add(&__start_vmem, &__stop_vmem);
-    }
+/* vmem_list_add not available in this version of libparam */
     if (ret)
         return ret;
 
